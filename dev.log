@@ -1,0 +1,8 @@
+
+> my-project@0.1.0 dev
+> next dev 2>&1 | tee next-dev.log
+
+▲ Next.js 16.2.0 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.86.53:3000
+✓ Ready in 902ms
