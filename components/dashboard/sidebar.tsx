@@ -2,8 +2,9 @@
 
 import Link from "next/link"
 import { useAuth } from "@/context/auth-context"
-import { LayoutDashboard, Settings, LogOut, Boxes } from "lucide-react"
+import { LayoutDashboard, Settings, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SiteLogo } from "@/components/site-logo"
 
 export function DashboardSidebar() {
   const { user, logout } = useAuth()
@@ -11,10 +12,8 @@ export function DashboardSidebar() {
   return (
     <aside className="flex h-screen w-64 flex-col border-r border-sidebar-border bg-sidebar">
       <div className="flex h-16 items-center border-b border-sidebar-border px-6">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <Boxes className="h-6 w-6 text-sidebar-primary" />
-          <span className="text-lg font-semibold text-sidebar-foreground">Portals</span>
-        </Link>
+        <SiteLogo withText={false} className="gap-2" />
+        <span className="ml-1 text-lg font-semibold text-sidebar-foreground">BDC Acceptor</span>
       </div>
 
       <nav className="flex-1 p-4">

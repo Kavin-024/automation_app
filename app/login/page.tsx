@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { FieldGroup, Field, FieldLabel } from "@/components/ui/field"
+import { SiteLogo } from "@/components/site-logo"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -35,7 +36,11 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <Card className="w-full max-w-md border-border bg-card">
+      <div className="w-full max-w-md">
+        <div className="mb-6 flex justify-center">
+          <SiteLogo />
+        </div>
+      <Card className="w-full border-border bg-card">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold text-foreground">Welcome Back</CardTitle>
           <CardDescription className="text-muted-foreground">
@@ -86,6 +91,7 @@ export default function LoginPage() {
           </p>
         </CardContent>
       </Card>
+      </div>
     </div>
   )
 }
