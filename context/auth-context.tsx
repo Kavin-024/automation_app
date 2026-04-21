@@ -45,7 +45,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
     try {
-      const data = await apiFetch("/auth/login", {
+      const data = await apiFetch("/auth/login.php", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       })
@@ -71,7 +71,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signup = useCallback(async (name: string, email: string, password: string): Promise<boolean> => {
     try {
-      const data = await apiFetch("/auth/register", {
+      const data = await apiFetch("/auth/register.php", {
         method: "POST",
         body: JSON.stringify({ name, email, password }),
       })
@@ -97,7 +97,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = useCallback(() => {
     const token = localStorage.getItem("auth_token")
-    void apiFetch("/auth/logout", {
+    void apiFetch("/auth/logout.php", {
       method: "POST",
       headers: token ? { Authorization: `Bearer ${token}` } : undefined,
     }).catch(() => {
