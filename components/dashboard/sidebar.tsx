@@ -1,8 +1,7 @@
 "use client"
-
 import Link from "next/link"
 import { useAuth } from "@/context/auth-context"
-import { LayoutDashboard, Settings, LogOut } from "lucide-react"
+import { LayoutDashboard, Settings, LogOut, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SiteLogo } from "@/components/site-logo"
 
@@ -29,13 +28,24 @@ export function DashboardSidebar() {
           </li>
           <li>
             <Link
-              href="/dashboard"
+              href="/dashboard/settings"
               className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             >
               <Settings className="h-4 w-4" />
               Settings
             </Link>
           </li>
+          {user?.role === "admin" && (
+            <li>
+              <Link
+                href="/dashboard/admin"
+                className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              >
+                <Shield className="h-4 w-4" />
+                Admin
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
 

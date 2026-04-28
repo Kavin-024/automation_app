@@ -8,6 +8,7 @@ interface User {
   id: number
   name: string
   email: string
+  role: string      
 }
 
 interface AuthContextType {
@@ -58,6 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: Number(data.user.id),
         name: String(data.user.name),
         email: String(data.user.email),
+        role: String(data.user.role), 
       }
 
       localStorage.setItem("auth_token", String(data.token))
@@ -84,6 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: Number(data.user.id),
         name: String(data.user.name),
         email: String(data.user.email),
+        role: String(data.user.role), 
       }
 
       localStorage.setItem("auth_token", String(data.token))

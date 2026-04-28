@@ -1,7 +1,6 @@
 "use client"
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "https://app.bpoautoaccept.online/backend/api"
-
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE || "https://app.bpoautoaccept.online/api").replace(/\/$/, "")
 export function getToken(): string | null {
   return localStorage.getItem("auth_token")
 }
