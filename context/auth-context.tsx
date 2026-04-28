@@ -8,7 +8,7 @@ interface User {
   id: number
   name: string
   email: string
-  role: string      
+  role: string
 }
 
 interface AuthContextType {
@@ -17,6 +17,7 @@ interface AuthContextType {
   signup: (name: string, email: string, password: string) => Promise<boolean>
   logout: () => void
   isAuthenticated: boolean
+  loading: boolean
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -24,6 +25,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const router = useRouter()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     try {
@@ -41,7 +43,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.removeItem("auth_token")
       localStorage.removeItem("auth_user")
       setUser(null)
-    }
+    } finally {
+      setLoading(false)  
+  }
   }, [])
 
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
@@ -59,7 +63,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: Number(data.user.id),
         name: String(data.user.name),
         email: String(data.user.email),
-        role: String(data.user.role), 
+        role: String(data.user.role),
       }
 
       localStorage.setItem("auth_token", String(data.token))
@@ -86,7 +90,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: Number(data.user.id),
         name: String(data.user.name),
         email: String(data.user.email),
-        role: String(data.user.role), 
+        role: String(data.user.role),
       }
 
       localStorage.setItem("auth_token", String(data.token))
@@ -121,6 +125,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signup,
         logout,
         isAuthenticated: !!user,
+        loading,
       }}
     >
       {children}
