@@ -37,6 +37,17 @@ export function DashboardSidebar() {
               Settings
             </Link>
           </li>
+          {user?.role === "admin" && (
+            <li>
+              <Link
+                href="/dashboard/admin"
+                className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              >
+                <Shield className="h-4 w-4" />
+                Admin
+              </Link>
+            </li>
+          )}
           <li>
             <Link
               href="/dashboard/orders"
