@@ -69,7 +69,7 @@ export default function OrdersPage() {
 
   const isAdmin = user?.role === "admin"
 
-  const adminColumns = ["ID", "Order ID", "Client", "Address", "Assigned", "Due", "Inspection", "Item", "Created At", "Mail Sent"]
+  const adminColumns = Object.keys(rows[0] || {})
   const userColumns = ["Order ID", "Client", "Address", "Due", "Status", "Created At"]
 
   const columns = isAdmin ? adminColumns : userColumns
@@ -156,28 +156,11 @@ export default function OrdersPage() {
                       <tr key={i} className="hover:bg-muted/50 transition-colors">
                         {isAdmin ? (
                           <>
-                            <td className="px-4 py-3 text-foreground">{(row as AdminRow).id}</td>
-                            <td className="px-4 py-3 text-foreground font-medium">{(row as AdminRow).order_id}</td>
-                            <td className="px-4 py-3 text-foreground">{(row as AdminRow).client}</td>
-                            <td className="px-4 py-3 text-foreground">{(row as AdminRow).address}</td>
-                            <td className="px-4 py-3 text-foreground">{(row as AdminRow).assigned}</td>
-                            <td className="px-4 py-3 text-foreground">{(row as AdminRow).due}</td>
-                            <td className="px-4 py-3">
-                              <span className="rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
-                                {(row as AdminRow).inspection}
-                              </span>
-                            </td>
-                            <td className="px-4 py-3 text-foreground">{(row as AdminRow).item}</td>
-                            <td className="px-4 py-3 text-muted-foreground">{(row as AdminRow).created_at}</td>
-                            <td className="px-4 py-3">
-                              <span className={`rounded-full px-2 py-1 text-xs font-medium ${
-                                (row as AdminRow).mail_sent === '1'
-                                  ? 'bg-green-500/10 text-green-500'
-                                  : 'bg-yellow-500/10 text-yellow-500'
-                              }`}>
-                                {(row as AdminRow).mail_sent === '1' ? 'Sent' : 'Pending'}
-                              </span>
-                            </td>
+                            {Object.values(row).map((val, idx) => (
+                              <td key={idx} className="px-4 py-3 text-foreground">
+                                {String(val ?? '')}
+                              </td>
+                            ))}
                           </>
                         ) : (
                           <>
